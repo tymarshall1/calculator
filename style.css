@@ -1,0 +1,15 @@
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  height: 100vh;
+}
+
+.calc-body {
+  display: flex;
+  background-color: red;
+  height: 100px;
+  width: 100%;
+}
