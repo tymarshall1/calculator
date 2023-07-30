@@ -30,5 +30,3 @@ function operate(operator, numberOne, numberTwo) {
       return divide(numberOne, numberTwo);
   }
 }
-
-console.log(operate("43", 2, 5));
