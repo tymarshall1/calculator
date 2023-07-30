@@ -11,41 +11,48 @@ document.querySelectorAll("#number").forEach((number) =>
     if (operators === "") {
       firstNumber += number.textContent;
       operation.textContent = firstNumber;
-      console.log("first", firstNumber);
-      console.log("sec", secondNumber);
     } else {
       secondNumber += number.textContent;
       operation.textContent = secondNumber;
-      console.log("first", firstNumber);
-      console.log("sec", secondNumber);
     }
   })
 );
 
-document
-  .querySelectorAll("#operator")
-  .forEach((operator) =>
-    operator.addEventListener("click", () => (operators = operator.textContent))
-  );
+document.querySelectorAll("#operator").forEach((operator) =>
+  operator.addEventListener("click", () => {
+    if (operators === "") {
+      operators = operator.textContent;
+      total = firstNumber;
+    } else {
+      if (secondNumber === "") {
+        operators = operator.textContent;
+        return;
+      }
+      total = operate(operators, parseInt(total), parseInt(secondNumber));
+      secondNumber = "";
+      operation.textContent = total;
+      operators = operator.textContent;
+    }
+  })
+);
 
-document
-  .querySelector("#equals")
-  .addEventListener(
-    "click",
-    () =>
-      (operation.textContent = operate(
-        operators,
-        parseInt(firstNumber),
-        parseInt(secondNumber)
-      ))
-  );
+document.querySelector("#equals").addEventListener("click", () => {
+  total = operate(operators, parseInt(total), parseInt(secondNumber));
+  secondNumber = "";
+  operation.textContent = total;
+});
 
 document.querySelector("#clear").addEventListener("click", () => {
   operation.textContent = "0";
+  clearInputs();
+});
+
+function clearInputs() {
   operators = "";
   firstNumber = "";
   secondNumber = "";
-});
+  total = "";
+}
 
 function add(x, y) {
   return x + y;
