@@ -24,7 +24,7 @@ button {
   justify-content: center;
   align-items: center;
   border: 2px solid black;
-  width: 25%;
+  width: 30%;
   min-width: 300px;
 }
 
@@ -34,17 +34,18 @@ button {
 }
 
 .screen-container {
-  display: flex;
-  flex-direction: column;
   width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
 }
 
-.operation,
-.equals {
+.operation {
   height: 25px;
-  width: 90%;
+  width: 95%;
   margin: 1em 0;
   text-align: right;
+  flex: 1;
 }
 
 .block {
