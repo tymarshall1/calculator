@@ -23,20 +23,24 @@ document.querySelectorAll("#operator").forEach((operator) =>
     if (operators === "") {
       operators = operator.textContent;
       total = firstNumber;
+      operationPreview();
     } else {
       if (secondNumber === "") {
         operators = operator.textContent;
+        operationPreview();
         return;
       }
+      operationPreview();
       total = operate(operators, parseInt(total), parseInt(secondNumber));
-      secondNumber = "";
       operation.textContent = total;
       operators = operator.textContent;
+      secondNumber = "";
     }
   })
 );
 
 document.querySelector("#equals").addEventListener("click", () => {
+  operationPreview();
   total = operate(operators, parseInt(total), parseInt(secondNumber));
   secondNumber = "";
   operation.textContent = total;
@@ -45,7 +49,17 @@ document.querySelector("#equals").addEventListener("click", () => {
 document.querySelector("#clear").addEventListener("click", () => {
   operation.textContent = "0";
   clearInputs();
+  operationPreview();
 });
+
+function operationPreview() {
+  const previewOfOperation = document.querySelector("#previewOfOperation");
+  if (secondNumber === "") {
+    previewOfOperation.textContent = `${total} ${operators}`;
+  } else {
+    previewOfOperation.textContent = `${total} ${operators} ${secondNumber} =`;
+  }
+}
 
 function clearInputs() {
   operators = "";
@@ -82,14 +96,3 @@ function operate(operator, numberOne, numberTwo) {
       return divide(numberOne, numberTwo);
   }
 }
-
-// function updateScreen() {
-//   document.querySelectorAll("button").forEach((button) =>
-//     button.addEventListener("click", () => {
-//       displayValue += button.textContent;
-//       operation.textContent = displayValue;
-//     })
-//   );
-// }
-
-// updateScreen();
