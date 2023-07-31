@@ -1,7 +1,6 @@
 let operators = "";
 let firstNumber = "";
 let secondNumber = "";
-let displayValue = "";
 let total = "";
 
 const operation = document.querySelector("#operation");
@@ -40,6 +39,18 @@ document.querySelectorAll("#operator").forEach((operator) =>
 );
 
 document.querySelector("#equals").addEventListener("click", () => {
+  if (
+    total === undefined ||
+    firstNumber === undefined ||
+    secondNumber === undefined ||
+    total === ""
+  ) {
+    operation.textContent = "0";
+    return;
+  }
+  if (secondNumber === "") {
+    return;
+  }
   operationPreview();
   total = operate(operators, parseInt(total), parseInt(secondNumber));
   secondNumber = "";

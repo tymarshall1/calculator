@@ -46,6 +46,7 @@ button {
   margin: 1em 0;
   text-align: right;
   flex: 1;
+  word-break: break-all;
 }
 
 .block {
