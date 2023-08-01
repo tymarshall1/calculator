@@ -78,12 +78,6 @@ document.querySelector("#clear").addEventListener("click", () => {
   operationPreview();
 });
 
-document.querySelectorAll("button").forEach((button) => {
-  if (button.disabled === true) {
-    button.style.pointerEvents = "none";
-  }
-});
-
 function operationPreview() {
   const previewOfOperation = document.querySelector("#previewOfOperation");
   if (secondNumber === "") {
