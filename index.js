@@ -13,18 +13,30 @@ document.querySelectorAll("#number").forEach((number) =>
       firstNumber += number.textContent;
       operation.textContent = firstNumber;
     } else {
-      console.log("test");
       secondNumber += number.textContent;
       operation.textContent = secondNumber;
     }
   })
 );
 
+document.querySelector("#decimal").addEventListener("click", (e) => {
+  if (firstNumber.includes(".") || secondNumber.includes(".")) {
+    return;
+  } else if (operators === "") {
+    firstNumber += e.target.textContent;
+    operation.textContent = firstNumber;
+  } else {
+    secondNumber += e.target.textContent;
+    operation.textContent = secondNumber;
+  }
+});
+
 document.querySelectorAll("#operator").forEach((operator) =>
   operator.addEventListener("click", () => {
     if (operators === "") {
       operators = operator.textContent;
       total = firstNumber;
+      firstNumber = "";
       operationPreview();
     } else {
       if (secondNumber === "") {
