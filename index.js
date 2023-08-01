@@ -3,6 +3,8 @@ let firstNumber = "";
 let secondNumber = "";
 let total = "";
 
+//bug is when click = multiple times and try typing numbers
+
 const operation = document.querySelector("#operation");
 
 document.querySelectorAll("#number").forEach((number) =>
@@ -11,6 +13,7 @@ document.querySelectorAll("#number").forEach((number) =>
       firstNumber += number.textContent;
       operation.textContent = firstNumber;
     } else {
+      console.log("test");
       secondNumber += number.textContent;
       operation.textContent = secondNumber;
     }
@@ -30,7 +33,7 @@ document.querySelectorAll("#operator").forEach((operator) =>
         return;
       }
       operationPreview();
-      total = operate(operators, parseInt(total), parseInt(secondNumber));
+      total = operate(operators, parseFloat(total), parseFloat(secondNumber));
       operation.textContent = total;
       operators = operator.textContent;
       secondNumber = "";
@@ -52,7 +55,7 @@ document.querySelector("#equals").addEventListener("click", () => {
     return;
   }
   operationPreview();
-  total = operate(operators, parseInt(total), parseInt(secondNumber));
+  total = operate(operators, parseFloat(total), parseFloat(secondNumber));
   secondNumber = "";
   operation.textContent = total;
 });
@@ -61,6 +64,12 @@ document.querySelector("#clear").addEventListener("click", () => {
   operation.textContent = "0";
   clearInputs();
   operationPreview();
+});
+
+document.querySelectorAll("button").forEach((button) => {
+  if (button.disabled === true) {
+    button.style.pointerEvents = "none";
+  }
 });
 
 function operationPreview() {
