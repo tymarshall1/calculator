@@ -80,7 +80,9 @@ document.querySelector("#clear").addEventListener("click", () => {
 
 function operationPreview() {
   const previewOfOperation = document.querySelector("#previewOfOperation");
-  if (secondNumber === "") {
+  if (secondNumber === "" && total === "") {
+    previewOfOperation.textContent = "0";
+  } else if (secondNumber === "") {
     previewOfOperation.textContent = `${total} ${operators}`;
   } else {
     previewOfOperation.textContent = `${total} ${operators} ${secondNumber} =`;
