@@ -3,8 +3,6 @@ let firstNumber = "";
 let secondNumber = "";
 let total = "";
 
-//bug is when click = multiple times and try typing numbers
-
 const operation = document.querySelector("#operation");
 
 document.querySelectorAll("#number").forEach((number) =>
@@ -23,10 +21,10 @@ document.querySelector("#decimal").addEventListener("click", (e) => {
   if (firstNumber.includes(".") || secondNumber.includes(".")) {
     return;
   } else if (operators === "") {
-    firstNumber += e.target.textContent;
+    firstNumber = handleDecimal(firstNumber, e);
     operation.textContent = firstNumber;
   } else {
-    secondNumber += e.target.textContent;
+    secondNumber = handleDecimal(secondNumber, e);
     operation.textContent = secondNumber;
   }
 });
@@ -54,16 +52,13 @@ document.querySelectorAll("#operator").forEach((operator) =>
 );
 
 document.querySelector("#equals").addEventListener("click", () => {
-  if (
-    total === undefined ||
-    firstNumber === undefined ||
-    secondNumber === undefined ||
-    total === ""
-  ) {
-    operation.textContent = "0";
+  if (total === "") {
+    if (firstNumber === "") {
+      return;
+    }
+    operation.textContent = firstNumber;
     return;
-  }
-  if (secondNumber === "") {
+  } else if (secondNumber === "") {
     return;
   }
   operationPreview();
@@ -77,6 +72,15 @@ document.querySelector("#clear").addEventListener("click", () => {
   clearInputs();
   operationPreview();
 });
+
+function handleDecimal(num, e) {
+  if (num === "") {
+    num += "0" + e.target.textContent;
+  } else {
+    num += e.target.textContent;
+  }
+  return num;
+}
 
 function operationPreview() {
   const previewOfOperation = document.querySelector("#previewOfOperation");
