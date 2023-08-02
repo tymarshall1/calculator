@@ -38,6 +38,9 @@ document.querySelector("#decimal").addEventListener("click", (e) => {
 document.querySelectorAll("#operator").forEach((operator) =>
   operator.addEventListener("click", () => {
     if (operators === "") {
+      if (firstNumber === "") {
+        return;
+      }
       operators = operator.textContent;
       total = firstNumber;
       firstNumber = "";
@@ -59,6 +62,7 @@ document.querySelectorAll("#operator").forEach((operator) =>
 
 document.querySelector("#equals").addEventListener("click", () => {
   if (total === "") {
+    operationPreview();
     if (firstNumber === "") {
       return;
     }
@@ -116,7 +120,11 @@ function handleDecimal(num, e) {
 function operationPreview() {
   const previewOfOperation = document.querySelector("#previewOfOperation");
   if (secondNumber === "" && total === "") {
-    previewOfOperation.textContent = "0";
+    if (firstNumber === "") {
+      previewOfOperation.textContent = "0";
+    } else {
+      previewOfOperation.textContent = firstNumber;
+    }
   } else if (secondNumber === "") {
     previewOfOperation.textContent = `${total} ${operators}`;
   } else {
