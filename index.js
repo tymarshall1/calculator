@@ -8,9 +8,15 @@ const operation = document.querySelector("#operation");
 document.querySelectorAll("#number").forEach((number) =>
   number.addEventListener("click", () => {
     if (operators === "") {
+      if (firstNumber.charAt(0) === "0" && firstNumber.charAt(1) !== ".") {
+        firstNumber = "";
+      }
       firstNumber += number.textContent;
       operation.textContent = firstNumber;
     } else {
+      if (secondNumber.charAt(0) === "0" && secondNumber.charAt(1) !== ".") {
+        secondNumber = "";
+      }
       secondNumber += number.textContent;
       operation.textContent = secondNumber;
     }
@@ -72,6 +78,31 @@ document.querySelector("#clear").addEventListener("click", () => {
   clearInputs();
   operationPreview();
 });
+
+document.querySelector("#backspace").addEventListener("click", handleBackspace);
+
+function handleBackspace() {
+  if (firstNumber !== "") {
+    firstNumber = handleBackspaceHelper(firstNumber);
+    operation.textContent = firstNumber;
+    return;
+  } else if (secondNumber !== "") {
+    secondNumber = handleBackspaceHelper(secondNumber);
+    operation.textContent = secondNumber;
+    return;
+  } else if (total !== "") {
+    total = handleBackspaceHelper(total);
+    operation.textContent = total;
+    return;
+  }
+}
+
+function handleBackspaceHelper(num) {
+  num = num.toString().slice(0, -1);
+  if (num === "") {
+    return "0";
+  } else return num;
+}
 
 function handleDecimal(num, e) {
   if (num === "") {
