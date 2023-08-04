@@ -22,8 +22,8 @@ button {
   align-items: center;
   border: 3px solid #4e4feb;
   border-radius: 5px;
-  width: 15%;
-  min-width: 300px;
+  width: 90%;
+  max-width: 300px;
   background-color: #068fff;
   gap: 10px;
   padding: 1em;
